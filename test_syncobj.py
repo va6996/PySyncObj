@@ -5,7 +5,7 @@ import pytest
 import random
 import threading
 import sys
-import pysyncobj.pickle as pickle
+import pysyncobj.pickler as pickle
 import pysyncobj.dns_resolver as dns_resolver
 import platform
 

@@ -24,7 +24,7 @@ except ImportError:  # python3
     def iteritems(v):
         return v.items()
 
-import pysyncobj.pickle as pickle
+import pickle
 
 from .dns_resolver import globalDnsResolver
 from .poller import createPoller
@@ -571,7 +571,7 @@ class SyncObj(object):
                     })
                 self.__onLeaderChanged()
                 if self.__votesCount > (len(self.__otherNodes) + 1) / 2:
-                    self.__onBecomeLeader()
+                    self._onBecomeLeader()
 
         if self.__raftState == _RAFT_STATE.LEADER:
             while self.__raftCommitIndex < self.__getCurrentLogIndex():
@@ -924,7 +924,7 @@ class SyncObj(object):
                 self.__votesCount += 1
 
                 if self.__votesCount > (len(self.__otherNodes) + 1) / 2:
-                    self.__onBecomeLeader()
+                    self._onBecomeLeader()
 
         if self.__raftState == _RAFT_STATE.LEADER:
             if message['type'] == 'next_node_idx':
@@ -1069,7 +1069,7 @@ class SyncObj(object):
             return
         self.__raftLog.deleteEntriesTo(diff)
 
-    def __onBecomeLeader(self):
+    def _onBecomeLeader(self):
         self.__raftLeader = self.__selfNode
         self.__setState(_RAFT_STATE.LEADER)
 

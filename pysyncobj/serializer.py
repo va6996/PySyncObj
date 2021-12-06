@@ -1,7 +1,7 @@
 import os
 import gzip
 import logging
-import pysyncobj.pickle as pickle
+import pysyncobj.pickler as pickle
 
 from io import BytesIO
 from .atomic_replace import atomicReplace

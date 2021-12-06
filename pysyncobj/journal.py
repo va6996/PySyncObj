@@ -4,7 +4,7 @@ import struct
 import shutil
 
 from .version import VERSION
-from .pickle import to_bytes, loads, dumps
+from .pickler import to_bytes, loads, dumps
 
 class Journal(object):
 
